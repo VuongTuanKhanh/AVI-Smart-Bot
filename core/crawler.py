@@ -17,10 +17,6 @@ class Crawler():
         pip_install('selenium')
         run_shell('apt-get update')
 
-        apt_install('chromium-chromedriver')
-
-        sys.path.insert(0, '../../usr/lib/chromium-browser/chromedriver')
-
     def get_browser(self):
         """Open a browser and go to the url
         Args:
