@@ -5,7 +5,7 @@ from time import sleep
 
 
 class Crawler():
-    def __init__(self, framework='selenium', copy_from='/usr/lib/chromium-browser/chromedriver', copy_to='/usr/bin'):
+    def __init__(self, framework='selenium', copy_from='../../usr/lib/chromium-browser/chromedriver', copy_to='../../usr/bin'):
         """Initialize the Crawler class
 
         Args:
