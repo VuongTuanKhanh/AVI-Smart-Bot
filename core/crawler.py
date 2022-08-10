@@ -38,7 +38,8 @@ class Crawler():
         chrome_options.add_argument('--disable-dev-shm-usage')
 
         service_object = Service(binary_path)
-        driver = webdriver.Chrome(service=f'../../{service_object}', options=chrome_options)
+        driver = webdriver.Chrome(
+            service=service_object, options=chrome_options)
 
         driver.get(url)
         return driver
