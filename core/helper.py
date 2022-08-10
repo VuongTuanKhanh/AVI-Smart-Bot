@@ -35,5 +35,5 @@ def apt_install(module_name):
 
     print(f"Module '{module_name}' is not installed ! \nInstalling ...")
     subprocess.check_call(
-        ['apt-get', 'install', '-y', module_name], stdout=open(os.devnull, 'wb'), stderr=STDOUT)
+        ['apt-get', 'install', '-y', module_name])
     print("Finish installation !!!")
