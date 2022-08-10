@@ -157,6 +157,8 @@ class Crawler():
         return crawl_data
 
     def append_data(self, new_data):
+        filtered_data = []
+        
         old_post_ids = self.get_post_ids()
 
         if not self.full_data:
@@ -166,11 +168,11 @@ class Crawler():
         for data in new_data:
             if data['id'] in old_post_ids:
                 break
-            new_data.append(data)
+            filtered_data.append(data)
 
         self.full_data.extend(new_data)
         self.save_data()
-        print(f'- Added {len(new_data)} new data')
+        print(f'- Added {len(filtered_data)} new data')
 
     def save_data(self):
         with open(self.full_data_file, 'w', encoding='utf8') as json_file:
