@@ -23,7 +23,10 @@ class Crawler():
 
         run_shell('apt-get update')
         run_shell('apt-get install chromium-browser')
-        shutil.copy(copy_from, copy_to)
+        try:
+            shutil.copy(copy_from, copy_to)
+        except:
+            print('Error')
 
         sys.path.insert(0, '../../usr/lib/chromium-browser/chromedriver')
 
