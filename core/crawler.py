@@ -124,14 +124,14 @@ class Crawler():
                 feed_question = feed.querySelector('div[class="dati1w0a ihqw7lf3 hv4rvrfc ecm0bbzt"]')
                 feed_answers = feed.querySelectorAll('div[class="ecm0bbzt e5nlhep0 a8c37x1j"]')
                 try {
-                    question = feed_question.innerText
+                    question = feed_question.innerText.toLowerCase()
                 }
                 catch { 
                     continue
                 }
                 for (let answer of feed_answers) {
                     try {
-                        data = answer.innerText
+                        data = answer.innerText.toLowerCase()
                     }
                     catch {
                         continue
