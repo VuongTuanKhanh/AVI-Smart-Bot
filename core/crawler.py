@@ -16,8 +16,6 @@ class Crawler():
 
         pip_install('selenium')
         run_shell('apt-get update')
-        from selenium import webdriver
-        from selenium.webdriver.common.by import By
 
         pip_install('chromedriver-py')
         # apt_install('chromium-chromedriver')
@@ -29,6 +27,9 @@ class Crawler():
         Args:
             url (str): A specific url that need to be open in the browser
         """
+
+        from selenium import webdriver
+        from selenium.webdriver.common.by import By
 
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument('--headless')
