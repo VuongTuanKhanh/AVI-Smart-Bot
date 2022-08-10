@@ -17,16 +17,12 @@ class Crawler():
         import shutil
 
         pip_install('selenium')
-
+        run_shell('apt-get update')
         from selenium import webdriver
         from selenium.webdriver.common.by import By
 
-        run_shell('apt-get update')
-        run_shell('apt-get install chromium-browser')
-        try:
-            shutil.copy(copy_from, copy_to)
-        except:
-            print('Error')
+        apt_install('chromium-browser')
+        shutil.copy(copy_from, copy_to)
 
         sys.path.insert(0, '../../usr/lib/chromium-browser/chromedriver')
 

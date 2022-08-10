@@ -1,11 +1,14 @@
+import sys
+import os
+import subprocess
+
+
 def pip_install(module_name):
     """Pip install module
 
     Args:
         module_name (__str__): Name of the module to install
     """
-    import sys
-    import subprocess
 
     print(f"Module '{module_name}' is not installed ! \n Installing ...")
     subprocess.check_call(
@@ -18,6 +21,19 @@ def run_shell(cmd):
     Args:
         cmd (str): A specific Shell command that need to be execute in the Python enviroment
     """
-    import subprocess
     # Create a sub process
-    proc = subprocess.Popen(cmd, shell=True, stdin=None, stdout=None, stderr=None, executable="/bin/bash")
+    proc = subprocess.Popen(cmd, shell=True, stdin=None,
+                            stdout=None, stderr=None, executable="/bin/bash")
+
+
+def apt_install(module_name):
+    """Apt install module
+
+    Args:
+        module_name (__str__): Name of the module to install
+    """
+
+    print(f"Module '{module_name}' is not installed ! \nInstalling ...")
+    subprocess.check_call(
+        ['apt-get', 'install', '-y', module_name], stdout=open(os.devnull, 'wb'), stderr=STDOUT)
+    print("Finish installation !!!")
