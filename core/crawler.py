@@ -47,7 +47,7 @@ class Crawler():
         self.browser.get(url)
         
         
-    def login(self, username='', password=''):
+    def login_workplace(self, username='', password=''):
         """Login to the website
         Args:
             username (str): Username of the user
@@ -79,6 +79,66 @@ class Crawler():
             sleep(self.wait_time)
             self.browser.find_element(By.ID, "idSIButton9").click()
             sleep(self.wait_time)
+    
+    
+    def scroll(self, times=0, wait=0):
+        for i in range(times):
+            self.browser.execute_script('window.scrollTo(0, document.body.scrollHeight);')
+            sleep(wait)
+            
+            
+    def see_more(self):
+        """Click on the 'See more' button
+        """
+
+        self.browser.execute_script('''
+            for(let element of document.querySelectorAll('div[role="button"][class="oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl gpro0wi8 oo9gr5id lrazzd5p"]')) 
+            {
+                element.click()
+                await new Promise(r => setTimeout(r, 1000));
+            }
+        ''')
+        
+        
+    def get_text(self):
+        """Get the text of the current page
+        """
+
+        return self.browser.execute_script('''
+            let results = []
+
+            let feeds = document.getElementsByClassName("du4w35lb k4urcfbm l9j0dhe7 sjgh65i0")
+            for (let feed of feeds)
+            {
+                let answers = []
+                
+                feed_question = feed.querySelector('div[class="dati1w0a ihqw7lf3 hv4rvrfc ecm0bbzt"]')
+                feed_answers = feed.querySelectorAll('div[class="ecm0bbzt e5nlhep0 a8c37x1j"]')
+
+                question = feed_question.innerText
+                for (let answer of feed_answers) {
+                    data = answer.innerText
+                    answers.push(data)
+                }
+                results.push({
+                    question: question,
+                    answers: answers
+                })
+            }
+            return results
+        ''')
+        
+    
+    def crawl_data(self):
+        self.see_more()
+        self.data = self.get_text()
+        
+    
+    def close(self):
+        """Close the browser
+        """
+
+        self.browser.close()
         
         
     @property
