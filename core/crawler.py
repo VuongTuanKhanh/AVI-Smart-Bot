@@ -4,7 +4,7 @@ from time import sleep
 
 
 class Crawler():
-    def __init__(self, framework='selenium', copy_from='../../usr/lib/chromium-browser/chromedriver', copy_to='../../usr/bin'):
+    def __init__(self, framework='selenium', copy_from='../../../../usr/lib/chromium-browser/chromedriver', copy_to='../../../../usr/bin'):
         """Initialize the Crawler class
 
         Args:
@@ -40,7 +40,7 @@ class Crawler():
         chrome_options.add_argument('--disable-dev-shm-usage')
 
         self.browser = webdriver.Chrome(
-            '../../usr/bin/chromedriver', options=chrome_options)
+            '../../../../usr/bin/chromedriver', options=chrome_options)
 
     def get_url(self, url=''):
         """Open a browser and go to the url
@@ -152,7 +152,7 @@ class Crawler():
         self.see_more()
         crawl_data = self.get_text()
         
-        print(f'- Crawled {len(crawl_data)} new data with {len(self.full_data)} old data, {len(self.get_questions)} new questions and {len(self.get_answers)} new answers.')
+        print(f'- Crawled {len(crawl_data)} new data with {len(self.full_data)} old data, {len(self.get_questions())} new questions and {len(self.get_answers())} new answers.')
         
         return crawl_data
 
