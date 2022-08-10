@@ -14,16 +14,12 @@ class Crawler():
             copy_to (str, optional): Destination_path. Defaults to '/usr/bin'.
         """
 
-        import shutil
-
         pip_install('selenium')
         run_shell('apt-get update')
         from selenium import webdriver
         from selenium.webdriver.common.by import By
 
-        # pip_install('chromium-chromedriver')
         apt_install('chromium-chromedriver')
-        shutil.copy(copy_from, copy_to)
 
         sys.path.insert(0, '../../usr/lib/chromium-browser/chromedriver')
 
