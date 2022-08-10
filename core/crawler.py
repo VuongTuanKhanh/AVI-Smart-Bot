@@ -22,7 +22,7 @@ class Crawler():
 
         # sys.path.insert(0, '../../usr/lib/chromium-browser/chromedriver')
 
-    def get_browser(self, url="https://fpt.workplace.com/groups/1711052639163719"):
+    def get_browser(self):
         """Open a browser and go to the url
         Args:
             url (str): A specific url that need to be open in the browser
@@ -39,7 +39,6 @@ class Crawler():
 
         service_object = Service(binary_path)
         driver = webdriver.Chrome(
-            service=service_object, options=chrome_options)
+            '../../usr/local/lib/python3.7/dist-packages/chromedriver_py/chromedriver_linux64', options=chrome_options)
 
-        driver.get(url)
         return driver
