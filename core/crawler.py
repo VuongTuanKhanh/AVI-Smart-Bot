@@ -20,7 +20,7 @@ class Crawler():
         pip_install('chromedriver-py')
         # apt_install('chromium-chromedriver')
 
-        sys.path.insert(0, '../../usr/lib/chromium-browser/chromedriver')
+        # sys.path.insert(0, '../../usr/lib/chromium-browser/chromedriver')
 
     def get_browser(self, url="https://fpt.workplace.com/groups/1711052639163719"):
         """Open a browser and go to the url
@@ -30,13 +30,16 @@ class Crawler():
 
         from selenium import webdriver
         from selenium.webdriver.common.by import By
+        from selenium.webdriver.chrome.service import Service
+        from chromedriver_py import binary_path
 
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
 
-        browser = webdriver.Chrome(
-            '../../usr/bin/chromedriver', options=chrome_options)
-        browser.get(url)
-        return browser
+        service_object = Service(binary_path)
+        driver = webdriver.Chrome(service=service_object)
+
+        driver.get(url)
+        return driver
