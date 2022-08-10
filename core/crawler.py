@@ -146,31 +146,30 @@ class Crawler():
 
     def crawl_data(self):
         import json
-        
+
         self.see_more()
         self.new_datas = self.get_text()
-        
+
         old_post_ids = []
         filter_data = []
-        
+
         with open(self.full_data_file, 'r') as f:
             self.full_data = json.load(f)
-            
+
         for data_ids in self.full_data:
             old_post_ids.append(data_ids['id'])
-            
+
         for data in self.new_datas:
             if data['id'] in old_post_ids:
                 break
             filter_data.append(data)
-            
+
         self.full_data.extend(filter_data)
-        
-        with open(self.full_data_file, 'w') as f:
-            json.dump(self.full_data, f)
-            
-        print(f'Added {len(filter_data)} new data')    
-            
+
+        with open(self.full_data_file, 'w', encoding='utf8') as json_file:
+            json.dump(self.full_data, json_file, ensure_ascii=False)
+
+        print(f'Added {len(filter_data)} new data')
 
     def close(self):
         """Close the browser
@@ -189,7 +188,7 @@ class Crawler():
     @property
     def wait_time(self):
         return 2
-    
+
     @property
     def full_data_file(self):
         return 'full_data.json'
