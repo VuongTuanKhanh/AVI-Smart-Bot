@@ -25,7 +25,7 @@ class Crawler():
         run_shell('apt-get install chromium-browser')
         shutil.copy(copy_from, copy_to)
 
-        sys.path.insert(0, '/usr/lib/chromium-browser/chromedriver')
+        sys.path.insert(0, '../../usr/lib/chromium-browser/chromedriver')
 
     def get_browser(self, url="https://fpt.workplace.com/groups/1711052639163719"):
         """Open a browser and go to the url
