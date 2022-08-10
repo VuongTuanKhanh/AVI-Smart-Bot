@@ -151,9 +151,9 @@ class Crawler():
 
         self.see_more()
         crawl_data = self.get_text()
-        
+
         print(f'- Crawled {len(crawl_data)} new data with {len(self.full_data)} old data, {len(self.get_questions())} new questions and {len(self.get_answers())} new answers.')
-        
+
         return crawl_data
 
     def append_data(self, new_data):
@@ -172,11 +172,9 @@ class Crawler():
         self.save_data()
         print(f'- Added {len(new_data)} new data')
 
-
     def save_data(self):
         with open(self.full_data_file, 'w', encoding='utf8') as json_file:
             json.dump(self.full_data, json_file, ensure_ascii=False)
-
 
     def print_data(self):
         for data in self.full_data:
