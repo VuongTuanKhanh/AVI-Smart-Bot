@@ -1,5 +1,3 @@
-import re
-import sys
 import json
 from core.helper import *
 from time import sleep
@@ -16,6 +14,7 @@ class Crawler():
         """
 
         self.full_data = []
+        self.new_data = []
 
         from time import sleep
 
@@ -151,26 +150,33 @@ class Crawler():
         """Crawl the data from the website"""
 
         self.see_more()
-        self.new_datas = self.get_text()
+        crawl_data = self.get_text()
+        
+        print(f'- Crawled {len(crawl_data)} new data with {len(self.full_data)} old data, {len(self.get_questions)} new questions and {len(self.get_answers)} new answers.')
+        
+        return crawl_data
 
-        filter_data = []
+    def append_data(self, new_data):
         old_post_ids = self.get_post_ids()
 
-        with open(self.full_data_file, 'r') as f:
-            self.full_data = json.load(f)
+        if not self.full_data:
+            with open(self.full_data_file, 'r') as f:
+                self.full_data = json.load(f)
 
-        for data in self.new_datas:
+        for data in self.crawl_data:
             if data['id'] in old_post_ids:
                 break
-            filter_data.append(data)
+            new_data.append(data)
 
-        self.full_data.extend(filter_data)
+        self.full_data.extend(new_data)
         self.save_data()
-        print(f'Added {len(filter_data)} new data')
+        print(f'- Added {len(new_data)} new data')
+
 
     def save_data(self):
         with open(self.full_data_file, 'w', encoding='utf8') as json_file:
             json.dump(self.full_data, json_file, ensure_ascii=False)
+
 
     def print_data(self):
         for data in self.full_data:
