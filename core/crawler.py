@@ -29,7 +29,6 @@ class Crawler():
         """
 
         from selenium import webdriver
-        from selenium.webdriver.common.by import By
         from selenium.webdriver.chrome.service import Service
         from chromedriver_py import binary_path
 
@@ -39,7 +38,7 @@ class Crawler():
         chrome_options.add_argument('--disable-dev-shm-usage')
 
         service_object = Service(binary_path)
-        driver = webdriver.Chrome(service=service_object)
+        driver = webdriver.Chrome(service=f'../../{service_object}', options=chrome_options)
 
         driver.get(url)
         return driver
