@@ -1,5 +1,5 @@
 import re
-import sys
+import sys, json
 from core.helper import *
 from time import sleep
 
@@ -145,19 +145,17 @@ class Crawler():
         ''')
 
     def crawl_data(self):
-        import json
-
+        """Crawl the data from the website"""
+        
         self.see_more()
         self.new_datas = self.get_text()
 
-        old_post_ids = []
         filter_data = []
+        old_post_ids = self.get_post_ids()
 
         with open(self.full_data_file, 'r') as f:
             self.full_data = json.load(f)
 
-        for data_ids in self.full_data:
-            old_post_ids.append(data_ids['id'])
 
         for data in self.new_datas:
             if data['id'] in old_post_ids:
@@ -165,11 +163,24 @@ class Crawler():
             filter_data.append(data)
 
         self.full_data.extend(filter_data)
-
+        self.save_data()
+        print(f'Added {len(filter_data)} new data')
+        
+        
+    def save_data(self):
         with open(self.full_data_file, 'w', encoding='utf8') as json_file:
             json.dump(self.full_data, json_file, ensure_ascii=False)
 
-        print(f'Added {len(filter_data)} new data')
+
+    def print_data(self):
+        for data in self.full_data:
+            print(data['id'])
+            print(data['question'])
+            for answer in data['answers']:
+                print('- ', answer)
+
+            print('------------------------------------------------------------------------------------------------------------------------------------')
+
 
     def close(self):
         """Close the browser
@@ -222,3 +233,11 @@ class Crawler():
         """
 
         return [url.get_attribute('href') for url in self.get_urls()]
+    
+    
+    def get_post_ids(self):
+        data_ids = []
+        for data in self.full_data:
+            data_ids.append(data['id'])
+        
+        return data_ids
