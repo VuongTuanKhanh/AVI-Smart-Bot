@@ -1,5 +1,6 @@
 import re
-import sys, json
+import sys
+import json
 from core.helper import *
 from time import sleep
 
@@ -13,6 +14,8 @@ class Crawler():
             copy_from (str, optional): Original Path. Defaults to '/usr/lib/chromium-browser/chromedriver'.
             copy_to (str, optional): Destination_path. Defaults to '/usr/bin'.
         """
+
+        self.full_data = []
 
         from time import sleep
 
@@ -146,7 +149,7 @@ class Crawler():
 
     def crawl_data(self):
         """Crawl the data from the website"""
-        
+
         self.see_more()
         self.new_datas = self.get_text()
 
@@ -156,7 +159,6 @@ class Crawler():
         with open(self.full_data_file, 'r') as f:
             self.full_data = json.load(f)
 
-
         for data in self.new_datas:
             if data['id'] in old_post_ids:
                 break
@@ -165,12 +167,10 @@ class Crawler():
         self.full_data.extend(filter_data)
         self.save_data()
         print(f'Added {len(filter_data)} new data')
-        
-        
+
     def save_data(self):
         with open(self.full_data_file, 'w', encoding='utf8') as json_file:
             json.dump(self.full_data, json_file, ensure_ascii=False)
-
 
     def print_data(self):
         for data in self.full_data:
@@ -180,7 +180,6 @@ class Crawler():
                 print('- ', answer)
 
             print('------------------------------------------------------------------------------------------------------------------------------------')
-
 
     def close(self):
         """Close the browser
@@ -233,11 +232,11 @@ class Crawler():
         """
 
         return [url.get_attribute('href') for url in self.get_urls()]
-    
-    
+
     def get_post_ids(self):
         data_ids = []
-        for data in self.full_data:
-            data_ids.append(data['id'])
-        
+        if self.full_data:
+            for data in self.full_data:
+                data_ids.append(data['id'])
+
         return data_ids
