@@ -127,7 +127,12 @@ class Crawler():
                     continue
                 }
                 for (let answer of feed_answers) {
-                    data = answer.innerText
+                    try {
+                        data = answer.innerText
+                    }
+                    catch {
+                        continue
+                    }
                     answers.push(data)
                 }
                 results.push({
