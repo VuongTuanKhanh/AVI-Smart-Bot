@@ -19,7 +19,8 @@ class Crawler():
         from selenium import webdriver
         from selenium.webdriver.common.by import By
 
-        apt_install('chromium-chromedriver')
+        pip_install('chromium-chromedriver')
+        # apt_install('chromium-chromedriver')
 
         sys.path.insert(0, '../../usr/lib/chromium-browser/chromedriver')
 
