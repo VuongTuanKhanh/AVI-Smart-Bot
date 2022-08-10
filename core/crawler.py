@@ -240,3 +240,22 @@ class Crawler():
                 data_ids.append(data['id'])
 
         return data_ids
+
+    @property
+    def data_length(self):
+        return len(self.full_data)
+
+    def get_questions(self):
+        questions = []
+        for data in self.full_data:
+            questions.append(data['question'])
+
+        return questions
+
+    def get_answers(self):
+        answers = []
+        for data in self.full_data:
+            for answer in data['answers']:
+                answers.append(answer)
+
+        return answers
