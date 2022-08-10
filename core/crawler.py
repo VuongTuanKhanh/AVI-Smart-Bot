@@ -163,7 +163,7 @@ class Crawler():
             with open(self.full_data_file, 'r') as f:
                 self.full_data = json.load(f)
 
-        for data in self.crawl_data:
+        for data in new_data:
             if data['id'] in old_post_ids:
                 break
             new_data.append(data)
