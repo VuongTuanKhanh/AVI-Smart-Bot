@@ -39,6 +39,6 @@ class Crawler():
 
         service_object = Service(binary_path)
         driver = webdriver.Chrome(
-            '../../usr/local/lib/python3.7/dist-packages/chromedriver_py/chromedriver_linux64', options=chrome_options)
+            executable_path='../../usr/local/lib/python3.7/dist-packages/chromedriver_py/chromedriver_linux64', options=chrome_options)
 
         return driver
