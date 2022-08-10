@@ -13,9 +13,16 @@ class Crawler():
             copy_from (str, optional): Original Path. Defaults to '/usr/lib/chromium-browser/chromedriver'.
             copy_to (str, optional): Destination_path. Defaults to '/usr/bin'.
         """
+        
+        from time import sleep
 
         pip_install('selenium')
         run_shell('apt-get update')
+        
+        sleep(10)
+        
+        apt_install('chromium-chromedriver')
+        
 
 
     def get_browser(self):
