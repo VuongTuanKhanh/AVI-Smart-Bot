@@ -1,0 +1,7 @@
+{
+    "neo4j": [{
+        "url": "neo4j+s://be07eb39.databases.neo4j.io",
+        "user": "neo4j",
+        "password": "LSyGlInCNi90KO1ZrjTHoxS17-R2GKT5Hx3kt-UitLs"
+    }]
+}
